@@ -13,6 +13,7 @@ jobs:
       - image: circleci/postgres:10
         environment:
           POSTGRES_USER: root
+          POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_DB: thumbnail
     steps:
       - checkout
