@@ -12,7 +12,8 @@ jobs:
       - image: circleci/node:10
       - image: circleci/postgres:10
         environment:
-          POSTGRES_USER: root
+          POSTGRES_USER: abhinav
+          POSTGRES_PASSWORD: password
           POSTGRES_DB: thumbnail
     steps:
       - checkout
@@ -23,9 +24,9 @@ jobs:
           paths:
             - node_modules
           key: v1-deps-{{ checksum "package.json" }}
-      - run: sudo -u postgres psql -p 5433 -c "create user ubuntu with password 'ubuntu';"
-      - run: sudo -u postgres psql -p 5433 -c "alter user ubuntu with superuser;"
-      - run: sudo -u postgres psql -p 5433 -c "create database test;"
+      - run: sudo -u postgres psql -p 5432 -c "create user ubuntu with password 'ubuntu';"
+      - run: sudo -u postgres psql -p 5432 -c "alter user ubuntu with superuser;"
+      - run: sudo -u postgres psql -p 5432 -c "create database test;"
       - run:
           name: Set Up DB
           command: |
