@@ -1,26 +1,26 @@
 {
   "development": {
-    "username": "webapp",
-    "password": "Webapp@123",
-    "database": "secure_node",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
+    "username": "abhinav",
+    "password": "password",
+    "database": "webapp",
+    "host": "localhost",
+    "dialect": "postgres",
     "operatorsAliases": false
   },
   "test": {
-    "username": "webapp",
-    "password": "Webapp@123",
-    "database": "secure_node",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
+    "username": "abhinav",
+    "password": "password",
+    "database": "webapp",
+    "host": "localhost",
+    "dialect": "postgres",
     "operatorsAliases": false
   },
   "production": {
-    "username": "webapp",
-    "password": "Webapp@123",
-    "database": "secure_node",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
+    "username": "abhinav",
+    "password": "password",
+    "database": "webapp",
+    "host": "localhost",
+    "dialect": "postgres",
     "operatorsAliases": false
   }
 }
