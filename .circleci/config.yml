@@ -28,5 +28,5 @@ jobs:
           name: Set Up DB
           command: |
             knex migrate:latest
-            knex seed:running_man
+            knex seed:run
       - run: npm test
