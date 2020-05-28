@@ -21,14 +21,14 @@ jobs:
           - node_modules
         key: v1-dependencies-{{ checksum "package.json" }}
       - run:
-        command: sudo -u postgres psql -p 5433 -c "create user ubuntu with password 'ubuntu';"
-        command: sudo -u postgres psql -p 5433 -c "alter user ubuntu with superuser;"
-        command: sudo -u postgres psql -p 5433 -c "create database test;"
+          command: sudo -u postgres psql -p 5433 -c "create user ubuntu with password 'ubuntu';"
+          command: sudo -u postgres psql -p 5433 -c "alter user ubuntu with superuser;"
+          command: sudo -u postgres psql -p 5433 -c "create database test;"
       - run: 
-        name: Set Up DB
-        command: |
-          knex migrate:latest
-          knex seed:run
+          name: Set Up DB
+          command: |
+            knex migrate:latest
+            knex seed:run
       - run: npm test
           
 
