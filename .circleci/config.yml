@@ -11,4 +11,25 @@ jobs:
     docker:
       - image: circleci/node:10
       - image: circleci/postgres:10
-        
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: thumbnail
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-deps-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-deps-{{ checksum "package.json" }}
+      - run: 
+          command: sudo -u postgres psql -p 5433 -c "create user ubuntu with password 'ubuntu';"
+          command: sudo -u postgres psql -p 5433 -c "alter user ubuntu with superuser;"
+          command: sudo -u postgres psql -p 5433 -c "create database test;"
+      - run:
+          name: Set Up DB
+          command: |
+            knex migrate:latest
+            knex seed:run
+      - run: npm test
