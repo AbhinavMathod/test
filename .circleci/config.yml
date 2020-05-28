@@ -24,9 +24,4 @@ jobs:
           paths:
             - node_modules
           key: v1-deps-{{ checksum "package.json" }}
-      - run:
-          name: Set Up DB
-          command: |
-            knex migrate:latest
-            knex seed:run
       - run: npm test
