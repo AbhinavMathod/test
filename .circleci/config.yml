@@ -24,9 +24,9 @@ jobs:
           paths:
             - node_modules
           key: v1-deps-{{ checksum "package.json" }}
-      - run: sudo -u postgres psql -p 5432 -c "create user ubuntu with password 'ubuntu';"
-      - run: sudo -u postgres psql -p 5432 -c "alter user ubuntu with superuser;"
-      - run: sudo -u postgres psql -p 5432 -c "create database test;"
+      - run:  -u postgres psql -p 5432 -c "create user ubuntu with password 'ubuntu';"
+      - run:  -u postgres psql -p 5432 -c "alter user ubuntu with superuser;"
+      - run:  -u postgres psql -p 5432 -c "create database test;"
       - run:
           name: Set Up DB
           command: |
