@@ -23,7 +23,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v1-deps-{{ checksum "package.json" }
+          key: v1-deps-{{ checksum "package.json" }}
       - run:
           name: Set Up DB
           command: |
