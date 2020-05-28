@@ -12,23 +12,10 @@ jobs:
       - image: circleci/node:10
       - image: circleci/postgres:10
         environment:
-          POSTGRES_USER: "abhinav"
-          POSTGRES_PASSWORD: "password"
-          POSTGRES_DB: "webapp"
-    environment:
-      NODE_ENV: "test"
-      POSTGRES_USER: "abhinav"
-      POSTGRES_PASSWORD: "password"
-      POSTGRES_DB: "webapp"
-      JWT_SECRET: "sekrit"
+          POSTGRES_USER: ubuntu
+          POSTGRES_PASSWORD: ubuntu
+          POSTGRES_DB: thumbnail
     steps:
-      - run:
-          name: Install ltree extension for Postgres
-          command: |
-            sudo apt-get update
-            sudo apt-get install postgresql-client
-            dockerize -wait tcp://localhost:5432 -timeout 1m
-            psql -U abhinav -h localhost -p 5432 -c 'create extension ltree'
       - checkout
       - restore_cache:
           key: v1-deps-{{ checksum "package.json" }}
@@ -37,4 +24,12 @@ jobs:
           paths:
             - node_modules
           key: v1-deps-{{ checksum "package.json" }}
+      - run: sudo -u postgres psql -p 5432 -c "create user ubuntu with password 'ubuntu';"
+      - run: sudo -u postgres psql -p 5432 -c "alter user ubuntu with superuser;"
+      - run: sudo -u postgres psql -p 5432 -c "create database test;"
+      - run:
+          name: Set Up DB
+          command: |
+            knex migrate:latest
+            knex seed:run
       - run: npm test
