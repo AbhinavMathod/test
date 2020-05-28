@@ -25,6 +25,7 @@ jobs:
             - node_modules
           key: v1-deps-{{ checksum "package.json" }}
       - run: psql postgres -U abhinav -c "CREATE DATABASE test;"
+      - run: 
           name: Set Up DB
           command: |
             knex migrate:latest
