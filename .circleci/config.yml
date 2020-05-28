@@ -15,17 +15,26 @@ jobs:
           POSTGRES_USER: "abhinav"
           POSTGRES_PASSWORD: "password"
           POSTGRES_DB: "webapp"
+    environment:
+      NODE_ENV: "test"
+      POSTGRES_USER: "abhinav"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "webapp"
+      JWT_SECRET: "sekrit"
     steps:
+      - run:
+          name: Install ltree extension for Postgres
+          command: |
+            sudo apt-get update
+            sudo apt-get install postgresql-client
+            dockerize -wait tcp://localhost:5432 -timeout 1m
+            psql -U abhinav -h localhost -p 5432 -c 'create extension ltree'
       - checkout
-      - run: cp ormconfig.circleci-common.json ormconfig.json
       - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+          key: v1-deps-{{ checksum "package.json" }}
       - run: npm install
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm run lint
+          key: v1-deps-{{ checksum "package.json" }}
       - run: npm test
