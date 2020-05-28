@@ -12,13 +12,13 @@ jobs:
       - image: circleci/node:10
       - image: circleci/postgres:10
         environment:
-          POSTGRES_USER: abhinav
-          POSTGRES_DB: webapp
-          POSTGRES_PASSWORD: password
+          POSTGRES_USER: circleci
+          POSTGRES_DB: circleci
+          POSTGRES_PASSWORD: circleci
     environment:
       NODE_ENV: test
-      POSTGRES_USER: abhinav
-      POSTGRES_DB: webapp
+      POSTGRES_USER: circleci
+      POSTGRES_DB: circleci
       JWT_SECRET: sekrit
     steps:
       - run:
