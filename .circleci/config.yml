@@ -23,10 +23,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v1-deps-{{ checksum "package.json" }}
-      - run:  -u postgres psql -p 5432 -c "create user ubuntu with password 'ubuntu';"
-      - run:  -u postgres psql -p 5432 -c "alter user ubuntu with superuser;"
-      - run:  -u postgres psql -p 5432 -c "create database test;"
+          key: v1-deps-{{ checksum "package.json" }
       - run:
           name: Set Up DB
           command: |
