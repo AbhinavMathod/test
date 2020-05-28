@@ -1,24 +1,24 @@
 {
   "development": {
-    "username": "circleci",
-    "password": "circleci",
-    "database": "circleci",
+    "username": "abhinav",
+    "password": "password",
+    "database": "webapp",
     "host": "localhost",
     "dialect": "postgres",
     "operatorsAliases": false
   },
   "test": {
-    "username": "circleci",
-    "password": "circleci",
-    "database": "circleci",
+    "username": "abhinav",
+    "password": "password",
+    "database": "webapp",
     "host": "localhost",
     "dialect": "postgres",
     "operatorsAliases": false
   },
   "production": {
-    "username": "circleci",
-    "password": "circleci",
-    "database": "circleci",
+    "username": "abhinav",
+    "password": "password",
+    "database": "webapp",
     "host": "localhost",
     "dialect": "postgres",
     "operatorsAliases": false
