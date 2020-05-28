@@ -13,7 +13,6 @@ jobs:
       - image: circleci/postgres:10
         environment:
           POSTGRES_USER: root
-          POSTGRES_PASSWORD: postgres
           POSTGRES_DB: thumbnail
     steps:
       - checkout
@@ -24,12 +23,12 @@ jobs:
           paths:
             - node_modules
           key: v1-deps-{{ checksum "package.json" }}
-      - run: psql postgres -c "CREATE ROLE ubuntu WITH PASSWORD 'ubuntu';"
-      - run: psql postgres -c "alter user ubuntu with superuser;"
-      - run: psql postgres -c "create database test;"
+      - run: sudo -u postgres psql -p 5432 -c "create user ubuntu with password 'ubuntu';"
+      - run: sudo -u postgres psql -p 5432 -c "alter user ubuntu with superuser;"
+      - run: sudo -u postgres psql -p 5432 -c "create database test;"
       - run:
           name: Set Up DB
           command: |
             knex migrate:latest
-            knex seed:run
+            knex seed:running_man
       - run: npm test
